@@ -1,20 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-public class Coletavel : MonoBehaviour
+public class Dano : MonoBehaviour
 {
     public ParticleSystem efeito;
-    public TMP_Text texto_pontuacao;
     public GameManager gameManager;
-    public PlayerMovement playerMovement;
-    int points = 0;
-    private int pontos = 5;
+
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("O Jogo começou! Você tem:\n" + pontos + "pontos!");
     }
 
     // Update is called once per frame
@@ -28,17 +24,10 @@ public class Coletavel : MonoBehaviour
         if (outro.CompareTag("Player"))
         {
             Debug.Log("Bateu");
-            gameManager.ganharVida();
-            playerMovement.runSpeed = 80f;
-            outro.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            gameManager.perderVida();
             Instantiate(efeito, transform.position, Quaternion.identity);
-            points++;
-            texto_pontuacao.text = "Pontos" + points.ToString();
             Destroy(gameObject);
 
         }
     }
-
 }
-
-
